@@ -14,3 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.landing {
+  height: 100vh;
+  padding: 5rem 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

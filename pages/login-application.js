@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import Link from 'next/link'
+
+//bootstrap componets
+import Container from 'react-bootstrap/Container'
+import Alert from 'react-bootstrap/Alert'
+
 
 const LoginApplication = () => {
   const router = useRouter()
   const { code } = router.query
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     if (code) {
@@ -19,13 +26,22 @@ const LoginApplication = () => {
         router.push('/')
       }).catch(err => {
         console.log(err.response.data)
+        setMessage(err.response.data.message)
       })
     }
-    
   }, [code])
   return (
-    <div>
-
+    <div className='pt-5'>
+      <Container>
+        {message &&
+          <Alert variant='danger'>
+            {`${message} `}
+            <Link href='/'>
+              <a className='alert-link'>Back to Home</a>
+            </Link>
+          </Alert>
+        }
+      </Container>
     </div>
   )
 }
