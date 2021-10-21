@@ -14,10 +14,9 @@ const LoginApplication = () => {
   const router = useRouter()
   const { code } = router.query
   const [message, setMessage] = useState('')
-  let [loading, setLoading] = useState(false);
+  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
     if (code) {
       const body = {
         code
