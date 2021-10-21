@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+
 import axios from 'axios'
-import Link from 'next/link'
+
+import ClipLoader from "react-spinners/ClipLoader";
 
 //bootstrap componets
 import Container from 'react-bootstrap/Container'
@@ -12,35 +14,48 @@ const LoginApplication = () => {
   const router = useRouter()
   const { code } = router.query
   const [message, setMessage] = useState('')
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     if (code) {
       const body = {
         code
       }
       axios.post('http://localhost:4000/', body).then(res => {
+        setLoading(false)
         localStorage.setItem('token', res.data.user.token)
         localStorage.setItem('username', res.data.user.username)
         localStorage.setItem('avatar', res.data.user.avatar)
         console.log(localStorage.getItem('token'))
         router.push('/')
       }).catch(err => {
+        setLoading(false)
         console.log(err.response.data)
-        setMessage(err.response.data.message)
+        if (err.response.status === 401) {
+          setMessage(err.response.data.message)
+        }
+        else setMessage('Unknown error')
       })
     }
   }, [code])
+
   return (
     <div className='pt-5'>
-      <Container>
+      <Container className='d-flex flex-column '>
         {message &&
           <Alert variant='danger'>
             {`${message} `}
-            <Link href='/'>
-              <a className='alert-link'>Back to Home</a>
-            </Link>
+            {message !== 'Unknown error' &&
+              <Alert.Link href='https://github.com/login/oauth/authorize?client_id=44e6bde78645589b252a&scope=admin:org,repo,user,read:packages,read:discussion'>
+                Try again
+              </Alert.Link>
+            }
           </Alert>
         }
+        <div className='align-self-center'>
+          <ClipLoader loading={loading} size={150} />
+        </div>
       </Container>
     </div>
   )
