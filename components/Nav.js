@@ -17,7 +17,6 @@ const Navb = () => {
     mutateUser('/api/logout', await useFetch('/api/logout', { method: 'POST' }), false)
     router.push('/')
   }
-  console.log(user)
 
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
@@ -43,28 +42,21 @@ const Navb = () => {
             }
             {
               user?.isLoggedIn &&
-
-              /*<Nav.Link href='/api/logout' onClick={logout}>
-                Logout
-              </Nav.Link>*/
-              <div className='d-flex flex-nowrap'>
-
-                <NavDropdown
-                  title={<img
-                    alt="av"
-                    src={user.avatar}
-                    width="30"
-                    height="30"
-                    className="d-inline-block rounded-circle"
-                  />}
-                  id="collasible-nav-dropdown"
-                  menuVariant="dark" align="end">
-                  <Dropdown.Header>Signed in as {user.username}</Dropdown.Header>
-                  <NavDropdown.Item href='/api/logout' onClick={logout}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </div>
+              <NavDropdown
+                title={<img
+                  alt="av"
+                  src={user.avatar}
+                  width="30"
+                  height="30"
+                  className="d-inline-block rounded-circle"
+                />}
+                id="collasible-nav-dropdown"
+                menuVariant="dark" align="end">
+                <Dropdown.Header>Signed in as {user.username}</Dropdown.Header>
+                <NavDropdown.Item href='/api/logout' onClick={logout}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
             }
           </Nav>
         </Navbar.Collapse>
