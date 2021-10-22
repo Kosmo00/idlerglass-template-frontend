@@ -13,7 +13,7 @@ import Card from 'react-bootstrap/Card'
 const Home = ({ organizations }) => {
   return (
     <Layout>
-      <Container>
+      <Container className='pt-5'>
         <Row>
           <Col xs={12} lg={10}>
             <Card>
@@ -47,7 +47,7 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
       }
     }
   }
-  let organizations = null
+  let organizations = []
   try {
     const response = await axios.get('http://localhost:4000/organizations', {
       headers: {

@@ -2,13 +2,31 @@ import Layout from '../components/Layout'
 import React from 'react'
 
 import useUser from '../services/auth/useUser'
+import withSession from '../services/auth/sesion'
+
+export const getServerSideProps = withSession(async function ({ req, res }) {
+  const user = req.session.get('user')
+
+  if (!user) {
+    return {
+      props: {}
+    }
+  }
+
+  return {
+    redirect: {
+      destination: '/home',
+      permanent: false,
+    },
+  }
+})
 
 const Home = () => {
-  const { user } = useUser({
-    redirectTo: '/home',
-    redirectIfFound: true
-  })
-  console.log(user)
+  /*  const { user } = useUser({
+      redirectTo: '/home',
+      redirectIfFound: true
+    })
+    console.log(user)*/
   return (
     <Layout>
       <main className='landing'>
