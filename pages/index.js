@@ -1,7 +1,14 @@
 import Layout from '../components/Layout'
 import React from 'react'
 
+import useUser from '../services/auth/useUser'
+
 const Home = () => {
+  const { user } = useUser({
+    redirectTo: '/home',
+    redirectIfFound: true
+  })
+  console.log(user)
   return (
     <Layout>
       <main className='landing'>
