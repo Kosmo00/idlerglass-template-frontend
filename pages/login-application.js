@@ -9,8 +9,14 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 
+import useUser from '../services/auth/useUser'
+import useFetch from '../services/fetchers/useFetch';
+
 
 const LoginApplication = () => {
+
+  const { mutateUser } = useUser()
+
   const router = useRouter()
   const { code } = router.query
   const [message, setMessage] = useState('')
@@ -23,11 +29,7 @@ const LoginApplication = () => {
       }
       axios.post('http://localhost:4000/', body).then(res => {
         setLoading(false)
-        localStorage.setItem('token', res.data.user.token)
-        localStorage.setItem('username', res.data.user.username)
-        localStorage.setItem('avatar', res.data.user.avatar)
-        console.log(localStorage.getItem('token'))
-        router.push('/')
+        login(res.data.user)
       }).catch(err => {
         setLoading(false)
         console.log(err.response.data)
@@ -38,6 +40,19 @@ const LoginApplication = () => {
       })
     }
   }, [code])
+
+  const login = async user => {
+    try {
+        mutateUser('/api/user', await useFetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      }))
+    } catch (err) {
+      console.log(err)
+    }
+    router.push('/')
+  }
 
   return (
     <div className='pt-5'>
@@ -52,7 +67,8 @@ const LoginApplication = () => {
             }
           </Alert>
         }
-        <div className='align-self-center'>
+        <div className='d-flex flex-column align-items-center h3'>
+          Fetching token from Github
           <ClipLoader loading={loading} size={150} />
         </div>
       </Container>
