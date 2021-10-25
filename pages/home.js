@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import Layout from '../components/Layout'
-import withSession from '../services/auth/sesion'
+import withAuth from '../middlewares/withAuth'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
@@ -37,16 +37,8 @@ const Home = ({ organizations }) => {
   )
 }
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
-  const user = req.session.get('user')
-  if (!user) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
+export const getServerSideProps = withAuth(async (context) => {
+  const { user } = context
   let organizations = []
   try {
     const response = await axios.get('http://localhost:4000/organizations', {
