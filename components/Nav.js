@@ -19,17 +19,10 @@ const Navb = () => {
   }
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
+    <Navbar collapseOnSelect bg="dark" variant="dark" fixed="top">
       <Container >
         <Navbar.Brand href="/">
-          <img
-            alt="logo"
-            src="/vercel.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{' '}
-          React Bootstrap
+          Github Reports
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end'>
@@ -52,7 +45,8 @@ const Navb = () => {
                 />}
                 id="collasible-nav-dropdown"
                 menuVariant="dark" align="end">
-                <Dropdown.Header>Signed in as {user.username}</Dropdown.Header>
+                <Dropdown.Header>Signed in as <span className="fw-bold">{user.username}</span></Dropdown.Header>
+                <NavDropdown.Divider />
                 <NavDropdown.Item href='/api/logout' onClick={logout}>
                   Logout
                 </NavDropdown.Item>

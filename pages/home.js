@@ -1,35 +1,28 @@
 import React from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import Layout from '../components/Layout'
+import CustomCard from '../components/CustomCard'
 import withAuth from '../middlewares/withAuth'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 
 const Home = ({ organizations }) => {
+  let component = ''
+
+  if (organizations.lenght === 0) {
+    component = <h2 className='text-center mt-5'>We have not found organizations associated with you</h2>
+  } else {
+    component = <CustomCard elements={organizations} title='Your Organizations' />
+  }
   return (
     <Layout>
-      <Container className='pt-5'>
-        <Row>
+      <Container fluid className='d-flex flex-column home'>
+        <Row className='justify-content-center'>
           <Col xs={12} lg={10}>
-            <Card>
-              <Card.Header>
-                <h2>Your Organizations</h2>
-              </Card.Header>
-              <Card.Body>
-                {organizations.map(organization => {
-                  return (
-                    <div>
-                      <Link href={`/org/${organization.name}`}><a>{organization.name}</a></Link>
-                    </div>
-                  )
-                })}
-              </Card.Body>
-            </Card>
+            {component}
           </Col>
         </Row>
       </Container>
