@@ -6,7 +6,7 @@ import { BsGrid3X3GapFill, BsArrowLeftCircleFill } from 'react-icons/bs';
 const BackLink = ({ destination }) => {
 
   return (
-    <div className='text-center backLink-div'>
+    <div className='backLink-div'>
       <Link href={destination}>
         <a className='customLink'><BsArrowLeftCircleFill /></a>
       </Link>

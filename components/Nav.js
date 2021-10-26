@@ -45,7 +45,14 @@ const Navb = () => {
                 />}
                 id="collasible-nav-dropdown"
                 menuVariant="dark" align="end">
-                <Dropdown.Header>Signed in as <span className="fw-bold">{user.username}</span></Dropdown.Header>
+                <Dropdown.Header>Signed in as <br /><span className="fw-bold">{user.username}</span></Dropdown.Header>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href={`https://github.com/${user.username}`} target='_blank'>
+                  Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href='/home'>
+                  Organizations
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href='/api/logout' onClick={logout}>
                   Logout
