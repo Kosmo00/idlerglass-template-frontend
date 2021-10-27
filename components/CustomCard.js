@@ -4,18 +4,18 @@ import Link from 'next/link'
 import Card from 'react-bootstrap/Card'
 import Badge from 'react-bootstrap/Badge'
 
-const CustomCard = (props) => {
+const CustomCard = ({ title, elements, kind_of_link }) => {
 
   return (
     <Card className='rounded-3 shadow custom-card border-0'>
       <Card.Header className='cardHeader shadow-sm'>
-        <h2 className='cardTitle text-capitalize'>{props.title}</h2>
+        <h2 className='cardTitle text-capitalize'>{`${title} repos`}</h2>
       </Card.Header>
       <Card.Body>
-        {props.elements.map(elem => {
+        {elements.map(elem => {
           return (
             <div key={elem.name}>
-              <Link href={`/org/${elem.name}`}>
+              <Link href={`/${kind_of_link === 1 ? title : 'org'}/${elem.name}`}>
                 <a className='customLink text-capitalize mr-1'>{elem.name}</a>
               </Link>
               {elem.privacity &&

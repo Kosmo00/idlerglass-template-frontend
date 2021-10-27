@@ -25,6 +25,7 @@ const Repo = ({ repo }) => {
         <Row className='justify-content-center'>
           <Col xs={12} lg={10}>
             {component}
+            {console.log(repo)}
           </Col>
         </Row>
         <Row className='justify-content-center align-items-center'>
@@ -39,12 +40,11 @@ const Repo = ({ repo }) => {
 
 export const getServerSideProps = withAuth(async (context) => {
   const { user } = context
-  const org_name = 'idlerglass'
-  const { repo_name } = context.query
+  const { repo_name, org_name } = context.query
 
   let repo = {}
   try {
-    const response = await axios.get(`http://localhost:4000/${org_name}/repos/${repo_name}`, {
+    const response = await axios.get(`http://localhost:4000/${org_name}/repo/${repo_name}`, {
       headers: {
         'x-token': user.token
       }

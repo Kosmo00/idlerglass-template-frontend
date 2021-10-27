@@ -12,19 +12,19 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 const Organization = ({ repos, org_name }) => {
-  let component = ''
+  let Component = ''
 
   if (repos.length === 0) {
-    component = <h2 className='text-center mt-5'>We have not found repositories associated with {org_name} organization</h2>
+    Component = <h2 className='text-center mt-5'>We have not found repositories associated with {org_name} organization</h2>
   } else {
-    component = <CustomCard elements={repos} title={`${org_name} repos`} />
+    Component = <CustomCard elements={repos} title={org_name} kind_of_link={1} />
   }
   return (
     <Layout>
       <Container fluid className='d-flex flex-column home'>
         <Row className='justify-content-center'>
           <Col xs={12} lg={10}>
-            {component}
+            {Component}
           </Col>
         </Row>
         <Row className='justify-content-center align-items-center'>
