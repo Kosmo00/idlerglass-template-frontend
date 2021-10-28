@@ -15,7 +15,6 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setPath(router.asPath)
-    console.log(router)
     setRoutes(path.split('/'))
   }, [path])
 
@@ -34,13 +33,17 @@ const Layout = ({ children }) => {
             {routes.map((route, index) => {
               let routeEnd = path.indexOf(route) + route.length
               let href = path.slice(0, routeEnd)
-              console.log(href)
               return (
-                <>
+                <React.Fragment key={`${route} ${index}`}>
                   {(route !== 'home' && route !== '') &&
-                    <Breadcrumb.Item className={`breadCrumb-item ${href === router.asPath ? 'active' : ''}`} key={route + index} href={href}>{route}</Breadcrumb.Item>
+                    <Breadcrumb.Item
+                      className={`breadCrumb-item ${href === router.asPath ? 'active' : ''}`}
+                      href={href}
+                    >
+                      {route}
+                    </Breadcrumb.Item>
                   }
-                </>
+                </React.Fragment>
               )
             }
             )

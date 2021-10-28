@@ -7,7 +7,7 @@ const _withAuth = (handler) => {
     if (!user) {
       return {
         redirect: {
-          destination: '/',
+          destination: '/login',
           permanent: false
         }
       }

@@ -42,7 +42,6 @@ export const COLUMNS = [
     Header: 'Assignee',
     accessor: 'assignee',
     Cell: ({ value }) => {
-      console.log(value)
       return (
         <>
           {
