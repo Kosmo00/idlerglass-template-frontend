@@ -19,7 +19,7 @@ const Navb = () => {
   }
 
   return (
-    <Navbar collapseOnSelect bg="dark" variant="dark" fixed="top">
+    <Navbar collapseOnSelect bg="dark" variant="dark" fixed="top" className='shadow'>
       <Container >
         <Navbar.Brand href="/">
           Github Reports

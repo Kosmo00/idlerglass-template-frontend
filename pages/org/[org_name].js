@@ -3,7 +3,8 @@ import axios from 'axios'
 
 import withAuth from '../../middlewares/withAuth'
 import Layout from '../../components/Layout'
-import CustomCard from '../../components/CustomCard'
+import CardSell from '../../components/CardShell'
+import ReposCardBody from '../../components/ReposCardBody'
 import BackLink from '../../components/BackLink'
 
 // react-bootstrap components
@@ -13,11 +14,12 @@ import Col from 'react-bootstrap/Col'
 
 const Organization = ({ repos, org_name }) => {
   let Component = ''
+  const cardBody = <ReposCardBody repos={repos} orgName={org_name} />
 
   if (repos.length === 0) {
     Component = <h2 className='text-center mt-5'>We have not found repositories associated with {org_name} organization</h2>
   } else {
-    Component = <CustomCard elements={repos} title={org_name} kind_of_link={1} />
+    Component = <CardSell title={`${org_name} repos`} children={cardBody} />
   }
   return (
     <Layout>

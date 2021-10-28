@@ -7,7 +7,8 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+  transition: color 0.4s ease;
 }
 
 * {
@@ -28,10 +29,29 @@ a {
   height: calc(100vh - 56px);
 }
 .layout-container{
+  position:relative;
   padding-top: 56px;
 }
-.customLink {
-  text-decoration: none;
+.breadCrumb-container{
+  position: absolute;
+  top: 56px;
+  left: 0;
+  z-index:100;
+  display: flex;
+  align-items: center;
+  background: #1e2326;
+}
+.breadCrumb{
+  margin-left: 10%;
+  margin-top: 10px;
+}
+.breadCrumb-item a{
+  color:rgb(149, 151, 175);
+  font-weight: 500;
+}
+.breadCrumb-item a:hover, .breadCrumb-item.active a{
+  color: rgb(233, 233, 241);
+  font-weight: 600;
 }
 .custom-card{
   margin-top: 100px;
@@ -72,4 +92,7 @@ color:rgb(128, 130, 155);
   .home, .landing{
   height: calc(100vh - 62px);
   }
+  .breadCrumb-container{
+  top: 61px;
+}
 }

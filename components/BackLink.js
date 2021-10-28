@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BsGrid3X3GapFill, BsArrowLeftCircleFill } from 'react-icons/bs';
+import { BsArrowLeftCircleFill } from 'react-icons/bs';
 
 // react-bootstrap components
 

@@ -1,7 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+
 import Layout from '../components/Layout'
-import CustomCard from '../components/CustomCard'
+import CardShell from '../components/CardShell'
+import OrgsCardBody from '../components/OrgsCardBody'
+
 import withAuth from '../middlewares/withAuth'
 
 // react-bootstrap components
@@ -11,11 +14,12 @@ import Col from 'react-bootstrap/Col'
 
 const Home = ({ organizations }) => {
   let component = ''
+  const cardBody = <OrgsCardBody organizations={organizations} />
 
   if (organizations.lenght === 0) {
     component = <h2 className='text-center mt-5'>We have not found organizations associated with you</h2>
   } else {
-    component = <CustomCard elements={organizations} title='Your Organizations' />
+    component = <CardShell children={cardBody} title='Your Organizations' />
   }
   return (
     <Layout>
