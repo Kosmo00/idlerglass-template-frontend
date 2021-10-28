@@ -42,11 +42,12 @@ export const COLUMNS = [
     Header: 'Assignee',
     accessor: 'assignee',
     Cell: ({ value }) => {
+      console.log(value)
       return (
         <>
           {
             value.username &&
-            <a href={`https://github.com/${value.login}/`}>
+            <a href={`https://github.com/${value.username}/`}>
               <img src={value.avatar} height={32} width={32} className='rounded-circle'></img>
               {value.username}
             </a>
