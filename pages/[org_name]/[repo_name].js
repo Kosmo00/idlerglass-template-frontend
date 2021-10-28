@@ -1,36 +1,78 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import axios from 'axios'
 
 import withAuth from '../../middlewares/withAuth'
 import Layout from '../../components/Layout'
-import CustomCard from '../../components/CustomCard'
-import BackLink from '../../components/BackLink'
+import { COLUMNS } from '../../components/react-table/issues-table/columns'
+
+// react-table
+import { useTable } from 'react-table'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 
 const Repo = ({ repo }) => {
-  let component = ''
+  const { name, collaborators, issues, labels } = repo
 
-  if (!repo) {
-    component = <h2 className='text-center mt-5'>We have not found the repository</h2>
-  } else {
-    component = <h2 className='text-center mt-5'>Hello World</h2>
-  }
+  const columns = useMemo(() => COLUMNS, [])
+  const data = useMemo(() => issues, [])
+
+  const tableInstance = useTable({
+    columns,
+    data
+  })
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow
+  } = tableInstance
+
   return (
     <Layout>
-      <Container fluid className='d-flex flex-column home'>
+      <Container fluid className='d-flex flex-column home mt-5'>
         <Row className='justify-content-center'>
-          <Col xs={12} lg={10}>
-            {component}
-            {console.log(repo)}
-          </Col>
-        </Row>
-        <Row className='justify-content-center align-items-center'>
-          <Col xs={12} lg={10}>
-            <BackLink destination='/home' />
+          <Col>
+            <h2>{name} repo issues</h2>
+            {
+              !issues ?
+                <h2 className='text-center mt-5'>We have not found Issues</h2>
+                :
+                <Table striped bordered hover {...getTableProps()}>
+                  <thead>
+                    {
+                      headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {
+                            headerGroup.headers.map(column => (
+                              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                            ))
+                          }
+                        </tr>
+                      ))
+                    }
+                  </thead>
+                  <tbody {...getTableBodyProps()}>
+                    {rows.map(row => {
+                      prepareRow(row)
+                      return (
+                        <tr {...row.getRowProps()}>
+                          {
+                            row.cells.map(cell => (
+                              <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                            ))
+                          }
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </Table>
+            }
           </Col>
         </Row>
       </Container>
@@ -50,7 +92,6 @@ export const getServerSideProps = withAuth(async (context) => {
       }
     })
     repo = response.data
-    console.log(repo)
   }
   catch (err) {
     console.log(err)
