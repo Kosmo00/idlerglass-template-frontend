@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navb />
-      {(router.pathname !== '/home' && router.pathname !== '/' && router.pathname !== '404') &&
+      {(router.pathname !== '/' && router.pathname !== '/login' && router.pathname !== '404') &&
         <Container className='breadCrumb-container' fluid bg='dark'>
           <Breadcrumb className='breadCrumb'>
             <Breadcrumb.Item className='breadCrumb-item' href='/'><FaHome /></Breadcrumb.Item>
@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
               let href = path.slice(0, routeEnd)
               return (
                 <React.Fragment key={`${route} ${index}`}>
-                  {(route !== 'home' && route !== '') &&
+                  {(route !== '') &&
                     <Breadcrumb.Item
                       className={`breadCrumb-item ${href === router.asPath ? 'active' : ''}`}
                       href={href}

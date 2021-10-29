@@ -5,7 +5,6 @@ import withAuth from '../../middlewares/withAuth'
 import Layout from '../../components/Layout'
 import CardSell from '../../components/CardShell'
 import ReposCardBody from '../../components/ReposCardBody'
-import BackLink from '../../components/BackLink'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
@@ -17,7 +16,7 @@ const Organization = ({ repos, org_name }) => {
   const cardBody = <ReposCardBody repos={repos} orgName={org_name} />
 
   if (repos.length === 0) {
-    Component = <h2 className='text-center mt-5'>We have not found repositories associated with {org_name} organization</h2>
+    Component = <h2 className='text-center'>We have not found repositories associated with {org_name} organization</h2>
   } else {
     Component = <CardSell title={`${org_name} repos`} children={cardBody} />
   }
@@ -27,11 +26,6 @@ const Organization = ({ repos, org_name }) => {
         <Row className='justify-content-center'>
           <Col xs={12} lg={10}>
             {Component}
-          </Col>
-        </Row>
-        <Row className='justify-content-center align-items-center'>
-          <Col xs={12} lg={10}>
-            <BackLink destination='/home' />
           </Col>
         </Row>
       </Container>

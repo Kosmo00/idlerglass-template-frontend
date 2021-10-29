@@ -43,7 +43,7 @@ const LoginApplication = () => {
 
   const login = async user => {
     try {
-        mutateUser('/api/user', await useFetch('/api/login', {
+      mutateUser('/api/user', await useFetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),

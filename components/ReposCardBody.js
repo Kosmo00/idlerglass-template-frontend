@@ -11,7 +11,7 @@ const ReposCardBody = ({ repos, orgName }) => {
             <Link href={`/${orgName}/${repo.name}`}>
               <a className='customLink text-capitalize mr-1'>{repo.name}</a>
             </Link>
-            <span className='privacityBadge'>
+            <span className='Badge'>
               {
                 repo.privacity ?
                   <Badge pill bg='danger'>
