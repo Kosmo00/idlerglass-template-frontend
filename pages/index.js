@@ -17,7 +17,7 @@ const Home = ({ organizations }) => {
   const cardBody = <OrgsCardBody organizations={organizations} />
 
   if (organizations.lenght === 0) {
-    component = <h2 className='text-center mt-5'>We have not found organizations associated with you</h2>
+    component = <h2 className='text-center'>We have not found organizations associated with you</h2>
   } else {
     component = <CardShell children={cardBody} title='Your Organizations' />
   }

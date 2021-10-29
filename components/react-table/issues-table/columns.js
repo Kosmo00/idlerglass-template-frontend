@@ -1,5 +1,6 @@
 import Badge from 'react-bootstrap/Badge'
-import TitleFilter from './filters/title'
+import Tooltip from 'react-bootstrap/Tooltip'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 export const COLUMNS = [
   {
@@ -8,9 +9,9 @@ export const COLUMNS = [
     Cell: ({ value: values }) => {
       return (
         <>
-          <p className='text-break'>
+          <p className='text-break my-2'>
             {values.title}
-            <Badge pill bg={values.closed_at ? 'danger' : 'primary'}>
+            <Badge className='Badge' pill bg={values.closed_at ? 'danger' : 'primary'}>
               {values.state}
             </Badge>
           </p>
@@ -24,7 +25,7 @@ export const COLUMNS = [
     accessor: 'labels',
     Cell: ({ value: values }) => {
       return values.map(value => (
-        <span key={value.name} className='text-nowrap d-inline-block'
+        <span key={value.name} className='text-nowrap d-inline-block my-2'
           style={{
             backgroundColor: `#${value.color}`,
             color: parseInt(value.color, 16) <= parseInt('ffffff', 16) / 8 * 7 ? '#fff' : '',
@@ -48,10 +49,11 @@ export const COLUMNS = [
         <>
           {
             value.username &&
-            <a href={`https://github.com/${value.username}/`}>
-              <img src={value.avatar} height={32} width={32} className='rounded-circle'></img>
-              {value.username}
-            </a>
+            <OverlayTrigger overlay={<Tooltip>{value.username}</Tooltip>}>
+              <a href={`https://github.com/${value.username}/`}>
+                <img src={value.avatar} height={32} width={32} className='rounded-circle'></img>
+              </a>
+            </OverlayTrigger>
           }
 
         </>

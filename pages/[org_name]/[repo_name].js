@@ -38,47 +38,48 @@ const Repo = ({ repo }) => {
 
   return (
     <Layout>
-      <Container fluid className='d-flex flex-column home mt-5'>
+      <Container fluid className='d-flex flex-column home'>
         <Row className='justify-content-center'>
           <Col>
-            <h2>{name} repo issues</h2>
+            <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
+
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
                 :
-                <Table striped bordered hover {...getTableProps()}>
-                  <thead>
-                    {
-                      headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                          {
-                            headerGroup.headers.map(column => (
-                              <th {...column.getHeaderProps()}>
-                                {column.render('Header')}
-                                <div>{column.canFilter ? column.render('Filter') : null}</div>
-                              </th>
-                            ))
-                          }
-                        </tr>
-                      ))
-                    }
-                  </thead>
-                  <tbody {...getTableBodyProps()}>
-                    {rows.map(row => {
-                      prepareRow(row)
-                      return (
-                        <tr {...row.getRowProps()}>
-                          {
-                            row.cells.map(cell => (
-                              <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                            ))
-                          }
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </Table>
+                <Container fluid className='Table-container'>
+                  <Table striped hover {...getTableProps()} className='Table shadow-lg'>
+                    <thead className='shadow-sm'>
+                      {
+                        headerGroups.map(headerGroup => (
+                          <tr {...headerGroup.getHeaderGroupProps()}>
+                            {
+                              headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps()} className='px-3 py-3 border-bottom-0'>{column.render('Header')}</th>
+                              ))
+                            }
+                          </tr>
+                        ))
+                      }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                      {rows.map(row => {
+                        prepareRow(row)
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {
+                              row.cells.map(cell => (
+                                <td {...cell.getCellProps()} className='px-3'>{cell.render('Cell')}</td>
+                              ))
+                            }
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
+                </Container>
             }
+
           </Col>
         </Row>
       </Container>
