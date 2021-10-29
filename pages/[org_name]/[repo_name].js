@@ -6,7 +6,7 @@ import Layout from '../../components/Layout'
 import { COLUMNS } from '../../components/react-table/issues-table/columns'
 
 // react-table
-import { useTable } from 'react-table'
+import { useTable, useFilters } from 'react-table'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
@@ -20,10 +20,13 @@ const Repo = ({ repo }) => {
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => issues, [])
 
-  const tableInstance = useTable({
-    columns,
-    data
-  })
+  const tableInstance = useTable(
+    {
+      columns,
+      data
+    },
+    useFilters
+  )
 
   const {
     getTableProps,
@@ -50,7 +53,10 @@ const Repo = ({ repo }) => {
                         <tr {...headerGroup.getHeaderGroupProps()}>
                           {
                             headerGroup.headers.map(column => (
-                              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                              <th {...column.getHeaderProps()}>
+                                {column.render('Header')}
+                                <div>{column.canFilter ? column.render('Filter') : null}</div>
+                              </th>
                             ))
                           }
                         </tr>

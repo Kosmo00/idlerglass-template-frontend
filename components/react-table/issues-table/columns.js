@@ -1,4 +1,5 @@
 import Badge from 'react-bootstrap/Badge'
+import TitleFilter from './filters/title'
 
 export const COLUMNS = [
   {
@@ -13,10 +14,10 @@ export const COLUMNS = [
               {values.state}
             </Badge>
           </p>
-
         </>
       )
-    }
+    },
+    Filter: TitleFilter,
   },
   {
     Header: 'Labels',
@@ -36,7 +37,8 @@ export const COLUMNS = [
         </span>
       )
       )
-    }
+    },
+    disableFilters: true
   },
   {
     Header: 'Assignee',
@@ -54,6 +56,7 @@ export const COLUMNS = [
 
         </>
       )
-    }
+    },
+    disableFilters: true
   },
 ]
