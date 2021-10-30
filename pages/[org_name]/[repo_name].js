@@ -5,7 +5,7 @@ import withAuth from '../../middlewares/withAuth'
 import Layout from '../../components/Layout'
 import { COLUMNS } from '../../components/react-table/issues-table/columns'
 import useIssuesTableReducer, { FILTER_TITLE } from '../../components/react-table/issues-table/issues-table-reducer'
-
+import FilterForm from '../../components/react-table/issues-table/filters/FilterForm'
 // react-table
 import { useTable } from 'react-table'
 
@@ -43,6 +43,7 @@ const Repo = ({ repo }) => {
         <Row className='justify-content-center'>
           <Col>
             <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
+            <FilterForm labels={labels} collaborators={collaborators} />
 
             {
               !issues ?
@@ -80,7 +81,6 @@ const Repo = ({ repo }) => {
                   </Table>
                 </Container>
             }
-
           </Col>
         </Row>
       </Container>
