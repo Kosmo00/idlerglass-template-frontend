@@ -7,8 +7,8 @@ import Assignee from './Assignee'
 import Title from './Title'
 import Status from './Status'
 import Labels from './Labels'
-import InitialDate from './Initial-date'
-import FinalDate from './Final-date'
+import InitialDate from './InitialDate'
+import FinalDate from './FinalDate'
 
 const FilterForm = ({ labels, collaborators }) => {
 
