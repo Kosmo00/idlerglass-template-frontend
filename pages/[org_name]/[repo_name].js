@@ -4,9 +4,10 @@ import axios from 'axios'
 import withAuth from '../../middlewares/withAuth'
 import Layout from '../../components/Layout'
 import { COLUMNS } from '../../components/react-table/issues-table/columns'
+import useIssuesTableReducer, { FILTER_TITLE } from '../../components/react-table/issues-table/issues-table-reducer'
 
 // react-table
-import { useTable, useFilters } from 'react-table'
+import { useTable } from 'react-table'
 
 // react-bootstrap components
 import Container from 'react-bootstrap/Container'
@@ -17,15 +18,15 @@ import Table from 'react-bootstrap/Table'
 const Repo = ({ repo }) => {
   const { name, collaborators, issues, labels } = repo
 
+  const [state, dispatch] = useIssuesTableReducer(issues)
+  console.log(state)
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => issues, [])
-
+  const data = useMemo(() => state, [])
   const tableInstance = useTable(
     {
       columns,
       data
     },
-    useFilters
   )
 
   const {

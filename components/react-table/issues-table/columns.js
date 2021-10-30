@@ -18,7 +18,6 @@ export const COLUMNS = [
         </>
       )
     },
-    Filter: TitleFilter,
   },
   {
     Header: 'Labels',
@@ -39,7 +38,6 @@ export const COLUMNS = [
       )
       )
     },
-    disableFilters: true
   },
   {
     Header: 'Assignee',
@@ -59,6 +57,5 @@ export const COLUMNS = [
         </>
       )
     },
-    disableFilters: true
   },
 ]
