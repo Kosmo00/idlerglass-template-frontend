@@ -1,8 +1,11 @@
 import { useReducer } from "react"
 
 export const FILTER_TITLE = 'filter_title'
-
-let initial_state
+export const FILTER_STATUS = 'filter_status'
+export const FILTER_INITIAL_DATE = 'filter_initial_date'
+export const FILTER_FINAL_DATE = 'filter_final_date'
+export const FILTER_LABELS = 'filter_labels'
+export const FILTER_ASSIGNEE = 'filter_assignee'
 
 const initial_filter_state = {
   title: '',
@@ -16,27 +19,25 @@ const initial_filter_state = {
 const reducer = (state, action) => {
   switch (action.type) {
     case FILTER_TITLE:
-      return [...filterByTitle(state, action.value)]
+      return { ...state, title: action.value }
+    case FILTER_STATUS:
+      return { ...state, status: action.value }
+    case FILTER_INITIAL_DATE:
+      return { ...state, initial_date_closed: action.value }
+    case FILTER_FINAL_DATE:
+      return { ...state, final_date_closed: action.value }
+    case FILTER_LABELS:
+      return { ...state, labels: action.value }
+    case FILTER_ASSIGNEE:
+      return { ...state, assignee: action.value }
     default:
-      return [...state]
+      return state
   }
 }
 
-const useIssuesTableReducer = (issues) => {
-  initial_state = issues
-  const [state, dispatch] = useReducer(reducer, issues)
+const useIssuesTableReducer = () => {
+  const [state, dispatch] = useReducer(reducer, initial_filter_state)
   return [state, dispatch]
 }
-
-const escapeRegExp = (stringToGoIntoTheRegex) => {
-  return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-}
-
-const filterByTitle = (state, value) => {
-  const value_with_valid_regex = escapeRegExp(value)
-  const regex = new RegExp(`${value_with_valid_regex}`, 'g')
-  return state.filter(issue => regex.test(issue.basic_data.title))
-}
-
 
 export default useIssuesTableReducer

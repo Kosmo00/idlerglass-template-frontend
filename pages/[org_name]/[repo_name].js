@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import axios from 'axios'
 
 import withAuth from '../../middlewares/withAuth'
@@ -18,10 +18,12 @@ import Table from 'react-bootstrap/Table'
 const Repo = ({ repo }) => {
   const { name, collaborators, issues, labels } = repo
 
-  const [state, dispatch] = useIssuesTableReducer(issues)
-  console.log(state)
+  const [filtersState, filtersDispatch] = useIssuesTableReducer()
+  const [tableData, setTableData] = useState([...issues])
+  console.log(tableData)
+
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => state, [])
+  const data = useMemo(() => tableData, [])
   const tableInstance = useTable(
     {
       columns,
@@ -43,7 +45,6 @@ const Repo = ({ repo }) => {
         <Row className='justify-content-center'>
           <Col>
             <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
-
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
@@ -80,7 +81,6 @@ const Repo = ({ repo }) => {
                   </Table>
                 </Container>
             }
-
           </Col>
         </Row>
       </Container>
