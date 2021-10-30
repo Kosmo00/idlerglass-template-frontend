@@ -10,8 +10,8 @@ export const FILTER_ASSIGNEE = 'filter_assignee'
 const initial_filter_state = {
   title: '',
   status: '',
-  initial_date_closed: null,
-  final_date_closed: null,
+  initial_date_closed: '',
+  final_date_closed: '',
   labels: [],
   assignee: ''
 }
@@ -36,7 +36,7 @@ const reducer = (state, action) => {
 }
 
 const useIssuesTableReducer = () => {
-  const [state, dispatch] = useReducer(reducer, initial_filter_state)
+  const [state, dispatch] = useReducer(reducer, { ...initial_filter_state })
   return [state, dispatch]
 }
 

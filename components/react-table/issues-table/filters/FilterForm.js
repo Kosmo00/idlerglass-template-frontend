@@ -10,17 +10,21 @@ import Labels from './Labels'
 import InitialDate from './InitialDate'
 import FinalDate from './FinalDate'
 
-const FilterForm = ({ labels, collaborators }) => {
+const FilterForm = ({ labels, collaborators, filtersDispatch, applyFilters, filters }) => {
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault()
+    applyFilters()
+  }
   return (
-    <Form >
+    <Form onSubmit={handleSubmit} >
       <Row className="mb-3">
-        <Title />
-        <Status />
-        <InitialDate />
-        <FinalDate />
-        <Labels labels={labels} />
-        <Assignee collaborators={collaborators} />
+        <Title filtersDispatch={filtersDispatch} state={filters.title} />
+        <Status filtersDispatch={filtersDispatch} state={filters.status} />
+        <InitialDate filtersDispatch={filtersDispatch} state={filters.initial_date_closed} />
+        <FinalDate filtersDispatch={filtersDispatch} state={filters.final_date_closed} />
+        <Labels labels={labels} filtersDispatch={filtersDispatch} state={filters.labels} />
+        <Assignee collaborators={collaborators} filtersDispatch={filtersDispatch} state={filters.assignee} />
       </Row>
       <Button variant="primary" type="submit">
         Filter

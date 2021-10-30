@@ -1,23 +1,24 @@
-const applyFilters = (filters, state) => {
-    const filtered_state = [...state]
-    if (filters.title !== '') {
-        filtered_state = filterByTitle(filtered_state, filters.title)
+const applyFilters = (filter, state) => {
+    let filtered_state = [...state]
+    if (filter.title !== '') {
+        filtered_state = filterByTitle(filtered_state, filter.title)
     }
     if (filter.status !== '') {
         filtered_state = filterByState(filtered_state, filter.status)
     }
-    if (filter.initial_date_closed !== null) {
+    if (filter.initial_date_closed !== '') {
         filtered_state = filterByInitialDate(filtered_state, filter.initial_date_closed)
     }
-    if (filter.final_date_closed !== null) {
+    if (filter.final_date_closed !== '') {
         filtered_state = filterByFinalDate(filtered_state, filter.final_date_closed)
     }
-    if (filter.labels !== []) {
+    if (filter.labels.length > 0) {
         filtered_state = filterByLabels(filtered_state, filter.labels)
     }
     if (filter.assignee !== '') {
         filtered_state = filterByAssignee(filtered_state, filter.assignee)
     }
+    return filtered_state
 }
 
 const _escapeRegExp = (stringToGoIntoTheRegex) => {
@@ -35,11 +36,22 @@ const filterByState = (state, value) => {
 }
 
 const filterByInitialDate = (state, value) => {
-    return state.filter(issue => issue.closed_at >= value)
+    return state.filter(issue => {
+        if (issue.basic_data.closed_at === null) {
+            return true
+        }
+        return new Date(issue.basic_data.closed_at) >= new Date(value)
+    })
 }
 
 const filterByFinalDate = (state, value) => {
-    return state.filter(issue => issue.closed_at <= value)
+    console.log(state)
+    return state.filter(issue => {
+        if (issue.basic_data.closed_at === null) {
+            return true
+        }
+        return new Date(issue.basic_data.closed_at) <= new Date(value)
+    })
 }
 
 const filterByLabels = (state, value) => {

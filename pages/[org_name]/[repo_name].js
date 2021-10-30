@@ -6,6 +6,8 @@ import Layout from '../../components/Layout'
 import { COLUMNS } from '../../components/react-table/issues-table/columns'
 import useIssuesTableReducer, { FILTER_TITLE } from '../../components/react-table/issues-table/issues-table-reducer'
 import FilterForm from '../../components/react-table/issues-table/filters/FilterForm'
+import applyFilters from '../../components/react-table/issues-table/filters/apply-filters'
+
 // react-table
 import { useTable } from 'react-table'
 
@@ -20,10 +22,9 @@ const Repo = ({ repo }) => {
 
   const [filtersState, filtersDispatch] = useIssuesTableReducer()
   const [tableData, setTableData] = useState([...issues])
-  console.log(tableData)
 
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => tableData, [])
+  const data = tableData
   const tableInstance = useTable(
     {
       columns,
@@ -39,13 +40,23 @@ const Repo = ({ repo }) => {
     prepareRow
   } = tableInstance
 
+  const getFilteredIssues = () => {
+    const new_table_data = applyFilters(filtersState, issues)
+    setTableData([...new_table_data])
+  }
+
   return (
     <Layout>
       <Container fluid className='d-flex flex-column home'>
         <Row className='justify-content-center'>
           <Col>
             <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
-            <FilterForm labels={labels} collaborators={collaborators} />
+            <FilterForm labels={labels}
+              collaborators={collaborators}
+              filtersDispatch={filtersDispatch}
+              filters={filtersState}
+              applyFilters={getFilteredIssues}
+            />
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
