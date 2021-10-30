@@ -4,9 +4,9 @@ import Col from 'react-bootstrap/Col'
 const Labels = ({ labels }) => {
 
   return (
-    <Form.Group as={Col} controlId="Label">
+    <Form.Group as={Col} controlId="Labels">
       <Form.Label>Label</Form.Label>
-      <Form.Select aria-label="Default select example">
+      <Form.Select multiple aria-label="Default select example">
         <option value=""></option>
         {labels.map((label, index) => {
           return (

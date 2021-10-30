@@ -7,7 +7,7 @@ const Assignee = ({ collaborators }) => {
     <Form.Group as={Col} controlId="assignee">
       <Form.Label>Assignee</Form.Label>
       <Form.Select aria-label="Default select example">
-      <option value=""></option>
+        <option value=""></option>
         {collaborators.map((collaborator, index) => {
           return (
             <option value={collaborator.username} key={collaborator.username + index}>{collaborator.username}</option>
