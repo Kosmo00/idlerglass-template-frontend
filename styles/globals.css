@@ -82,6 +82,12 @@ a {
   padding: 0;
   margin-top: 1.8rem;
 }
+.tableTitle span{
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cecdcf;
+  line-height: 2.8rem;
+}
 .Table{
   border-radius: 5px;
 }
@@ -90,6 +96,13 @@ a {
 }
 .Table tbody{
   border-top: 1px solid #d2d2d4 !important;
+}
+.FilterForm-container{
+  margin-top: 3.5rem;
+}
+.FilterForm-container label{
+  color: #636264;
+  font-weight: 600;
 }
 /* 
 @media (max-width: 768px) {

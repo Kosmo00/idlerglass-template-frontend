@@ -41,11 +41,13 @@ const Repo = ({ repo }) => {
 
   return (
     <Layout>
-      <Container fluid className='d-flex flex-column home'>
+      <Container fluid className='d-flex flex-column home mt-4'>
         <Row className='justify-content-center'>
-          <Col>
-            <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
-            <FilterForm labels={labels} collaborators={collaborators} />
+          <Col >
+            <h2 className='text-capitalize tableTitle'><span>{name} repo issues</span></h2>
+            <div className='FilterForm-container'>
+              <FilterForm labels={labels} collaborators={collaborators} />
+            </div>
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
