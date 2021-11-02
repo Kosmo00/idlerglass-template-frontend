@@ -2,6 +2,8 @@ import Badge from 'react-bootstrap/Badge'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
+import Label from '../../StatusLabel'
+
 export const COLUMNS = [
   {
     Header: 'Title',
@@ -24,17 +26,7 @@ export const COLUMNS = [
     accessor: 'labels',
     Cell: ({ value: values }) => {
       return values.map(value => (
-        <span key={value.name} className='text-nowrap d-inline-block my-2'
-          style={{
-            backgroundColor: `#${value.color}`,
-            color: parseInt(value.color, 16) <= parseInt('ffffff', 16) / 8 * 7 ? '#fff' : '',
-            marginLeft: 5,
-            padding: '2px 7px',
-            borderRadius: '2em',
-            fontSize: 12
-          }}>
-          {value.name}
-        </span>
+        <Label value={value} key={value.name} />
       )
       )
     },

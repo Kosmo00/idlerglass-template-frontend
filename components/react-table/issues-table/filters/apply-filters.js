@@ -55,9 +55,14 @@ const filterByFinalDate = (state, value) => {
 }
 
 const filterByLabels = (state, value) => {
+    console.log(value)
     return state.filter(issue => {
+        const labels = issue.labels.map(lab => (
+            lab.name
+        ))
+
         for (let i = 0; i < value.length; i++) {
-            if (!issue.labels.includes(value[i])) {
+            if (!labels.includes(value[i])) {
                 return false
             }
             return true

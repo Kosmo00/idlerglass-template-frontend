@@ -16,6 +16,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
 
 const Repo = ({ repo }) => {
   const { name, collaborators, issues, labels } = repo
@@ -50,21 +51,28 @@ const Repo = ({ repo }) => {
       <Container fluid className='d-flex flex-column home mt-4'>
         <Row className='justify-content-center'>
           <Col>
-            <h2 className='text-capitalize tableTitle'><span>{name} repo issues</span></h2>
+            <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
             <div className='FilterForm-container'>
-              <FilterForm labels={labels}
-                collaborators={collaborators}
-                filtersDispatch={filtersDispatch}
-                filters={filtersState}
-                applyFilters={getFilteredIssues}
-              />
+              <Card className='custom-card shadow-sm cardFilters'>
+                <Card.Header className='shadow-sm cardHeader'>
+                  <h5 className='cardTitle'>Filters</h5>
+                </Card.Header>
+                <Card.Body>
+                  <FilterForm labels={labels}
+                    collaborators={collaborators}
+                    filtersDispatch={filtersDispatch}
+                    filters={filtersState}
+                    applyFilters={getFilteredIssues}
+                  />
+                </Card.Body>
+              </Card>
             </div>
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
                 :
                 <Container fluid className='Table-container'>
-                  <Table striped hover {...getTableProps()} className='Table shadow-lg'>
+                  <Table striped hover {...getTableProps()} className='Table shadow'>
                     <thead className='shadow-sm'>
                       {
                         headerGroups.map(headerGroup => (

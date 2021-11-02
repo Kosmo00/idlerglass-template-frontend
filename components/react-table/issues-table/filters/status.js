@@ -1,29 +1,32 @@
 import { FILTER_STATUS } from '../issues-table-reducer'
+import Select from 'react-select';
 
 // react-bootstrap components
 import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 
+const options = [
+  { value: '', label: 'All' },
+  { value: 'open', label: 'open' },
+  { value: 'closed', label: 'closed' },
+];
 const Status = ({ filtersDispatch, state }) => {
 
-  const handleChange = ev => {
+  const handleChange = selectedOption => {
+    console.log(selectedOption)
     filtersDispatch({
       type: FILTER_STATUS,
-      value: ev.target.value
+      value: selectedOption.value
     })
   }
   return (
-    <Form.Group as={Col} controlId="status">
+    <Form.Group controlId="status">
       <Form.Label>Status</Form.Label>
-      <Form.Select
-        value={state}
+      <Select
+        defaultValue={''}
         onChange={handleChange}
-        aria-label="Default select example"
-      >
-        <option value=""></option>
-        <option value="open">Open</option>
-        <option value="closed">Closed</option>
-      </Form.Select>
+        options={options}
+        isSearchable
+      />
     </Form.Group >
   )
 }

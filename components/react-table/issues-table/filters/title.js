@@ -14,7 +14,7 @@ const Title = ({ filtersDispatch, state }) => {
   }
 
   return (
-    <Form.Group as={Col} controlId="Title">
+    <Form.Group controlId="Title">
       <Form.Label>Title</Form.Label>
       <Form.Control type="text" placeholder="Title" onChange={handleChange} value={state} />
     </Form.Group>

@@ -13,7 +13,7 @@ const InitialDate = ({ filtersDispatch, state }) => {
     })
   }
   return (
-    <Form.Group as={Col} controlId="initialDate">
+    <Form.Group controlId="initialDate">
       <Form.Label>Closed Initial Date</Form.Label>
       <Form.Control
         value={state}

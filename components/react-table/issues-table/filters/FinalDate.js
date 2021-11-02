@@ -12,7 +12,7 @@ const FinalDate = ({ filtersDispatch, state }) => {
     })
   }
   return (
-    <Form.Group as={Col} controlId="finalDate">
+    <Form.Group controlId="finalDate">
       <Form.Label>Closed Final Date</Form.Label>
       <Form.Control value={state} onChange={handleChange} type="date" />
     </Form.Group>

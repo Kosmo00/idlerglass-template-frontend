@@ -61,13 +61,20 @@ a {
   border-bottom: 1px solid rgb(149 145 145 / 13%);
   background-color: #e8e7ed;
 }
- .cardHeader  .cardTitle, .tableTitle{
+.cardTitle, .tableTitle{
   color: #4c4b4e;
 }
 .custom-card a{
   font-size: 1.3rem;
   color: rgb(100, 101, 114);
   font-weight: 500;
+}
+.cardFilters .cardTitle{
+   color: #636264;
+}
+.cardFilters .cardHeader{
+  background-color: #f7f7f8;
+  border-bottom: 1px solid rgba(0,0,0,.125);
 }
 .Badge{
   margin-left: .4rem;
@@ -81,12 +88,10 @@ a {
 .Table-container{
   padding: 0;
   margin-top: 1.8rem;
+  margin-bottom: 6rem;
 }
-.tableTitle span{
+.tableTitle {
   font-weight: 700;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #cecdcf;
-  line-height: 2.8rem;
 }
 .Table{
   border-radius: 5px;
