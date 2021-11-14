@@ -6,6 +6,7 @@ export const FILTER_INITIAL_DATE = 'filter_initial_date'
 export const FILTER_FINAL_DATE = 'filter_final_date'
 export const FILTER_LABELS = 'filter_labels'
 export const FILTER_ASSIGNEE = 'filter_assignee'
+export const RESET_FILTER = 'reset_filter'
 
 const initial_filter_state = {
   title: '',
@@ -30,6 +31,8 @@ const reducer = (state, action) => {
       return { ...state, labels: action.value }
     case FILTER_ASSIGNEE:
       return { ...state, assignee: action.value }
+    case RESET_FILTER:
+      return { ...initial_filter_state }
     default:
       return state
   }

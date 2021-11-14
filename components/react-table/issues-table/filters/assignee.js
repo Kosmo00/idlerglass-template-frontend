@@ -1,23 +1,27 @@
-import { FILTER_ASSIGNEE } from '../issues-table-reducer'
+import { useRef } from 'react'
+import Select from 'react-select'
 
-import Select from 'react-select';
+import { FILTER_ASSIGNEE } from '../issues-table-reducer'
 
 // react-bootstrap components
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
+
 
 const Assignee = ({ collaborators, filtersDispatch, state }) => {
   const options = collaborators.map(collab => (
     { value: collab.username, label: collaborator(collab) }
   ))
   options.unshift({ value: '', label: 'All' })
-  function collaborator(value) {
+  const collaborator = (value) => {
     return (
       <span>
-        {`${value.username}  `}<img src={value.avatar} height={32} width={32} className='rounded-circle'></img>
+        <img src={value.avatar} height={32} width={32} className='rounded-circle'></img>{`${value.username}  `}
       </span>
     )
   }
+
+  const ref = useRef(null)
 
   const handleChange = selectedOption => {
     filtersDispatch({
@@ -29,10 +33,13 @@ const Assignee = ({ collaborators, filtersDispatch, state }) => {
     <Form.Group as={Col} controlId="assignee">
       <Form.Label>Assignee</Form.Label>
       <Select
-        defaultValue=''
+        ref={ref}
+        defaultValue={state}
         onChange={handleChange}
         options={options}
+        instanceId='select-assignee'
         isSearchable
+        id='select-assignee'
       />
     </Form.Group>
   )

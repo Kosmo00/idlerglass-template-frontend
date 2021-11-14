@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -11,14 +12,23 @@ import Labels from './Labels'
 import InitialDate from './InitialDate'
 import FinalDate from './FinalDate'
 
+import { RESET_FILTER } from '../issues-table-reducer'
+
 const FilterForm = ({ labels, collaborators, filtersDispatch, applyFilters, filters }) => {
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault()
+  const handleReset = () => {
+    filtersDispatch({
+      type: RESET_FILTER
+    })
     applyFilters()
+
   }
+  useEffect(() => {
+    applyFilters()
+  }, [filters])
+
   return (
-    <Form onSubmit={handleSubmit} >
+    <Form>
       <Row className="mb-4">
         <Col>
           <Row className="mb-3" >
@@ -26,13 +36,11 @@ const FilterForm = ({ labels, collaborators, filtersDispatch, applyFilters, filt
           </Row>
           <Row>
             <Status filtersDispatch={filtersDispatch} state={filters.status} />
-
           </Row>
         </Col>
         <Col>
           <Row className="mb-3" >
             <InitialDate filtersDispatch={filtersDispatch} state={filters.initial_date_closed} />
-
           </Row>
           <Row>
             <FinalDate filtersDispatch={filtersDispatch} state={filters.final_date_closed} />
@@ -43,12 +51,7 @@ const FilterForm = ({ labels, collaborators, filtersDispatch, applyFilters, filt
       </Row>
       <Row className='d-flex justify-content-center'>
         <Col xs='auto'>
-          <Button variant="outline-primary" type="submit" className='px-5'>
-            Filter
-          </Button>
-        </Col>
-        <Col xs='auto'>
-          <Button variant="outline-danger" type="reset" className='px-5'>
+          <Button variant="outline-danger" type="reset" className='px-5' onClick={() => handleReset()}>
             Reset
           </Button>
         </Col>
