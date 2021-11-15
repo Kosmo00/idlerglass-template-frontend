@@ -9,10 +9,6 @@ import Form from 'react-bootstrap/Form'
 
 
 const Assignee = ({ collaborators, filtersDispatch, state }) => {
-  const options = collaborators.map(collab => (
-    { value: collab.username, label: collaborator(collab) }
-  ))
-  options.unshift({ value: '', label: 'All' })
   const collaborator = (value) => {
     return (
       <span>
@@ -20,6 +16,10 @@ const Assignee = ({ collaborators, filtersDispatch, state }) => {
       </span>
     )
   }
+  const options = collaborators.map(collab => (
+    { value: collab.username, label: collaborator(collab) }
+  ))
+  options.unshift({ value: '', label: 'All' })
 
   const ref = useRef(null)
 
