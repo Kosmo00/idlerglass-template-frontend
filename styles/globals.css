@@ -61,13 +61,20 @@ a {
   border-bottom: 1px solid rgb(149 145 145 / 13%);
   background-color: #e8e7ed;
 }
- .cardHeader  .cardTitle, .tableTitle{
+.cardTitle, .tableTitle{
   color: #4c4b4e;
 }
 .custom-card a{
   font-size: 1.3rem;
   color: rgb(100, 101, 114);
   font-weight: 500;
+}
+.cardFilters .cardTitle{
+   color: #636264;
+}
+.cardFilters .cardHeader{
+  background-color: #f7f7f8;
+  border-bottom: 1px solid rgba(0,0,0,.125);
 }
 .Badge{
   margin-left: .4rem;
@@ -81,6 +88,10 @@ a {
 .Table-container{
   padding: 0;
   margin-top: 1.8rem;
+  margin-bottom: 6rem;
+}
+.tableTitle {
+  font-weight: 700;
 }
 .Table{
   border-radius: 5px;
@@ -90,6 +101,13 @@ a {
 }
 .Table tbody{
   border-top: 1px solid #d2d2d4 !important;
+}
+.FilterForm-container{
+  margin-top: 3.5rem;
+}
+.FilterForm-container label{
+  color: #636264;
+  font-weight: 600;
 }
 /* 
 @media (max-width: 768px) {

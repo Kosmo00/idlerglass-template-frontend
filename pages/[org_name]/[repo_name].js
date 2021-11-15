@@ -6,6 +6,8 @@ import Layout from '../../components/Layout'
 import { COLUMNS } from '../../components/react-table/issues-table/columns'
 import useIssuesTableReducer, { FILTER_TITLE } from '../../components/react-table/issues-table/issues-table-reducer'
 import FilterForm from '../../components/react-table/issues-table/filters/FilterForm'
+import applyFilters from '../../components/react-table/issues-table/filters/apply-filters'
+
 // react-table
 import { useTable } from 'react-table'
 
@@ -14,16 +16,16 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
 
 const Repo = ({ repo }) => {
   const { name, collaborators, issues, labels } = repo
 
   const [filtersState, filtersDispatch] = useIssuesTableReducer()
   const [tableData, setTableData] = useState([...issues])
-  console.log(tableData)
 
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => tableData, [])
+  const data = tableData
   const tableInstance = useTable(
     {
       columns,
@@ -39,19 +41,38 @@ const Repo = ({ repo }) => {
     prepareRow
   } = tableInstance
 
+  const getFilteredIssues = () => {
+    const new_table_data = applyFilters(filtersState, issues)
+    setTableData([...new_table_data])
+  }
+
   return (
     <Layout>
-      <Container fluid className='d-flex flex-column home'>
+      <Container fluid className='d-flex flex-column home mt-4'>
         <Row className='justify-content-center'>
           <Col>
             <h2 className='text-capitalize tableTitle'>{name} repo issues</h2>
-            <FilterForm labels={labels} collaborators={collaborators} />
+            <div className='FilterForm-container'>
+              <Card className='custom-card shadow-sm cardFilters'>
+                <Card.Header className='shadow-sm cardHeader'>
+                  <h5 className='cardTitle'>Filters</h5>
+                </Card.Header>
+                <Card.Body>
+                  <FilterForm labels={labels}
+                    collaborators={collaborators}
+                    filtersDispatch={filtersDispatch}
+                    filters={filtersState}
+                    applyFilters={getFilteredIssues}
+                  />
+                </Card.Body>
+              </Card>
+            </div>
             {
               !issues ?
                 <h2 className='text-center mt-5'>We have not found Issues</h2>
                 :
                 <Container fluid className='Table-container'>
-                  <Table striped hover {...getTableProps()} className='Table shadow-lg'>
+                  <Table striped hover {...getTableProps()} className='Table shadow'>
                     <thead className='shadow-sm'>
                       {
                         headerGroups.map(headerGroup => (
